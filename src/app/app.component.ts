@@ -9,23 +9,29 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Form';
+  isLoggedIn: boolean = false;
 
   constructor(private keycloakservice: KeycloakService, private route: Router) {
-   // this.initializeKeycloak();
+    this.checkLoginStatus();
   }
 
   alrMsg() {
     alert('Please login to access careers!!');
   }
-  loginWithKeycloak(){
-   this.keycloakservice.login();
+
+  loginWithKeycloak() {
+    this.keycloakservice.login();
   }
-  logoutWithKeycloak(){
+
+  logoutWithKeycloak() {
     this.keycloakservice.logout();
+    this.isLoggedIn = false; // Update isLoggedIn flag upon logout
   }
-  ngOnInit() {
-    this.keycloakservice.isLoggedIn().then((isLoggedIn) => {
-      if (isLoggedIn) {
+
+  checkLoginStatus() {
+    this.keycloakservice.isLoggedIn().then((loggedIn) => {
+      this.isLoggedIn = loggedIn; // Update isLoggedIn flag based on login status
+      if (this.isLoggedIn) {
         this.route.navigate(['/careers']);
       }
     });
