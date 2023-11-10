@@ -88,6 +88,77 @@ app.post('/api/applyjob', (req, res) => {
   );
 });
 
+app.get('/api/JobDetailsByEmail/:email', (req, res) => {
+  const jobEmail = req.params.email; // Get the email from the URL parameter
+  const query = {
+    text: 'SELECT * FROM applyjob WHERE email = $1',
+    values: [jobEmail],
+  };
+  pool.query(query, (error, result) => {
+    if (error) {
+      console.error('Error fetching user data:', error);
+      res.status(500).json({ message: 'Error fetching data from the database' });
+    } else {
+      res.json(result.rows);
+    }
+  });
+});
+
+
+app.put('/api/applyjob/:email', (req, res) => {
+  const email = req.params.email; // Get the email from the URL parameter
+  const {
+    firstname,
+    lastname,
+    gender,
+    phone,
+    dob,
+    cursal,
+    loc,
+    skill,
+    compname,
+    jobtitle,
+    jobloc,
+    course,
+    branch,
+    college,
+    colloc
+  } = req.body;
+
+  pool.query(
+    'UPDATE applyjob SET firstname = $1, lastname = $2, gender = $3, phone = $4, dob = $5, cursal = $6, loc = $7, skill = $8, compname = $9, jobtitle = $10, jobloc = $11, course = $12, branch = $13, college = $14, colloc = $15 WHERE email = $16',
+    [
+      firstname,
+      lastname,
+      gender,
+      phone,
+      dob,
+      cursal,
+      loc,
+      skill,
+      compname,
+      jobtitle,
+      jobloc,
+      course,
+      branch,
+      college,
+      colloc,
+      email // The email for the WHERE clause
+    ],
+    (error, result) => {
+      if (error) {
+        console.error('Error updating data:', error);
+        res.status(500).json({ message: 'Error updating data in the database' });
+      } else {
+        if (result.rowCount > 0) {
+          res.status(200).json({ message: 'Data updated successfully' });
+        } else {
+          res.status(404).json({ message: 'Data not found for the given email' });
+        }
+      }
+    }
+  );
+});
 
 
 app.delete('/api/applyjob/:email', (req, res) => {

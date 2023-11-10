@@ -9,6 +9,7 @@ import { TableComponent } from './table/table.component';
 import { AuthguardService } from './Auth/authguard.service';
 import { AuthguardGuard } from './Auth/authguard.guard';
 import { FormDetailsComponent } from './form-details/form-details.component';
+import { EditComponent } from './edit/edit.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,7 @@ const routes: Routes = [
   {path:'apply-job',component:ApplyJobComponent},
   {path:'table',component:TableComponent},
   {path:'formDetails',component:FormDetailsComponent},
-
+  {path:'table/edit/:email', component:EditComponent}
 ];
 
 @NgModule({

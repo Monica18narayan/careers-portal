@@ -21,6 +21,7 @@ import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule} from '@angular/material/sort';
 import { KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from './keycloak/job-init';
+import { EditComponent } from './edit/edit.component';
 
 
 
@@ -35,6 +36,7 @@ import { initializeKeycloak } from './keycloak/job-init';
     ApplyJobComponent,
     TableComponent,
     FormDetailsComponent,
+    EditComponent,
 
   ],
   imports: [

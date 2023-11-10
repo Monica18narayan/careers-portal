@@ -1,11 +1,11 @@
-<header class="bg-teal-900 h-24">
+<header class="bg-teal-900 h-20">
   <nav class="flex justify-between items-center w-[98%]">
    
     <div>
-      <img class="w-1/2 h-24" src="https://muraai.com/wp-content/uploads/2019/12/new-logo-for-web-1.png">
+      <img class="w-32 h-auto py-8" src="assets/images/Pic.png">
     </div>
-    <div>
-      <ul class="flex items-center gap-[4vw] text-neutral-50 mt-10 ">
+  <div>
+      <ul class="flex items-center gap-[4vw] text-neutral-50 mt-4 ">
         <li>
           <i class="fas fa-home"></i>&nbsp;
            <a routerLink="/home" routerLinkActive="active">Home</a>
@@ -33,21 +33,22 @@
   <div>
     <!-- <i class="far fa-user-circle" class="color: #fafafa;"></i> -->
         <button *ngIf="!isLoggedIn" 
-          class="bg-transparent hover:bg-teal-900 text-neutral-50 font-semibold hover:text-white py-2 px-4 border border-white hover:border-white rounded ml-12 mt-10" 
+          class="bg-transparent hover:bg-teal-900 text-neutral-50 font-semibold hover:text-white py-2 px-4 border border-white hover:border-white rounded ml-12 mt-2" 
           (click)="loginWithKeycloak()">Login</button>
           
-          <button
-          class="bg-transparent hover:bg-teal-900 text-neutral-50 font-semibold hover:text-white py-2 px-4 border border-white hover:border-white rounded ml-12 mt-10" 
+          <button *ngIf="isLoggedIn"
+          class="bg-transparent hover:bg-teal-900 text-neutral-50 font-semibold hover:text-white py-2 px-4 border border-white hover:border-white rounded ml-12 mt-2" 
           (click)="logoutWithKeycloak()">Logout</button>
     </div>
 
   </nav>
 </header>
 <header class="bg-yellow-50 h-14">
-  <ul class="flex justify-center text-teal-900 font-extrabold py-4 px-4 text-xl ">
-  <li *ngIf="isLoggedIn"  >
-    <!-- <i class="fas fa-user"></i>&nbsp; -->
-    <span>Muraai Welcomes {{ username }} to the official website</span>
+  <ul class=" text-teal-900 font-extrabold py-4 px-4 text-xl ">
+  <li *ngIf="isLoggedIn" class="flex items-center">
+    <i class="fas fa-user"></i>&nbsp;
+    <span CLASS="ml-2">{{ username }}</span>
+    <!-- <p class="flex items-center justify-center">Welcome to the Muraai's Career Portal</p> -->
   </li>
 </ul>
 </header>

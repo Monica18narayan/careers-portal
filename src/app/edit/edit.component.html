@@ -1,0 +1,204 @@
+<p>edit works!</p>
+<p>edit works!</p>
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100 p-4 md:p-10 lg:p-16">
+    <div class="max-w-lg w-full p-4 md:p-6 lg:p-8 bg-white rounded-lg shadow-md">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-semibold">{{ title }}</h2>
+        <form [formGroup]="editapplyjob" class="mt-4">
+         
+            <div class="flex mb-4 ">
+                <div class="w-1/4">
+                   
+                    
+                    <label for="firstname" class="block font-normal">First Name <span
+                            class="text-red-600">*</span></label>
+                    <input formControlName="firstname" type="text" id="firstname"
+                        class="form-input p-2 rounded-md border-2" />
+                    <div *ngIf="valid['firstname'].getError('required') && valid['firstname'].get('firstname')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        First Name is required.
+                    </div>
+                    <div *ngIf="editapplyjob?.get('firstname')?.hasError('minlength') && editapplyjob?.get('firstname')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        First Name must be at least 4 characters long.
+                    </div>
+                </div>
+                <div class="w-1/4 ml-36">
+                    <label for="lastname" class="block font-normal">Last Name</label>
+                    <input formControlName="lastname" type="text" id="lastname"
+                        class="form-input p-2 rounded-md border-2" />
+                </div>
+            </div>
+
+            <div class="flex ">
+                <div class="w-1/4">
+                    <label for="gender" class="block font-normal">Gender <span class="text-red-600">*</span></label>
+                    <select formControlName="gender" class="form-select p-2 w-52 rounded-md border-2">
+                        <option value="" disabled selected>Select an option</option>
+                        <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
+                    </select>
+                    <div *ngIf="editapplyjob.get('gender')?.hasError('required') && editapplyjob.get('gender')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        Gender is required.
+                    </div>
+                </div>
+                <div class="w-1/4 ml-36 mb-2">
+                    <label for="email" class="block font-normal">Email<span class="text-red-600">*</span></label>
+                    <input formControlName="email" type="email" id="email"
+                        class="form-input p-2 mb-4 rounded-md border-2" />
+                    <div *ngIf="editapplyjob.get('email')?.hasError('required') && editapplyjob.get('email')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        Email is required.
+                    </div>
+                    <div *ngIf="editapplyjob.get('email')?.hasError('email') && editapplyjob.get('email')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex mb-4 ">
+                <div class="w-1/4 ">
+                    <label for="phone" class="block font-normal">Contact No<span class="text-red-600">*</span></label>
+                    <input formControlName="phone" type="text" id="firstname"
+                        class="form-input p-2 rounded-md border-2" />
+
+                    <div *ngIf="valid['phone'].getError('pattern')!=null"
+                    class="text-red-600 text-sm mt-1">
+                   phone number must be 10 digits
+                </div>
+                </div>
+
+                <div class=" ml-36">
+                    <label for="dob" class="block font-normal">DOB<span class="text-red-600">*</span></label>
+                    <input type="date" formControlName="dob" id="dob" class="form-input w-52 p-2 rounded-md border-2" />
+                    <div *ngIf="editapplyjob.get('dob')?.hasError('required') && editapplyjob.get('dob')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        Date of Birth is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex mb-4 ">
+                <div class="w-1/4">
+                    <label for="cursal" class="block font-normal">Current-Salary</label>
+                    <input formControlName="cursal" type="text" id="cursal"
+                        class="form-input p-2 rounded-md border-2" />
+                    <div *ngIf="editapplyjob.get('cursal')?.hasError('required') && editapplyjob.get('cursal')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        Current Salary is required.
+                    </div>
+                </div>
+
+                <div class="ml-36">
+                    <label for="loc" class="block font-normal">Location <span class="text-red-600">*</span></label>
+                    <select formControlName="loc" class="form-select p-2 w-52 rounded-md border-2">
+                        <option value="" disabled selected>Select an option</option>
+                        <option *ngFor="let loc of locs" [value]="loc">{{ loc }}</option>
+                    </select>
+                    <div *ngIf="editapplyjob.get('loc')?.hasError('required') && editapplyjob.get('loc')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        Location is required.
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="flex mb-4 "> -->
+            <div>
+                <label for="skill" class="block font-normal">Skills<span class="text-red-600">*</span></label>
+                <input formControlName="skill" type="text" id="skill" placeholder="ex:angular,node-js"
+                    placeholder:color="grey" class="form-input p-2 w-full rounded-md border-2" />
+                <div *ngIf="editapplyjob.get('skill')?.hasError('required') && editapplyjob.get('skill')?.touched"
+                    class="text-red-600 text-sm mt-1">
+                    Skills are required.
+                </div>
+            </div>
+            <!-- </div> -->
+            <hr class="h-px my-8 bg-black border-0 ">
+            <h2>Experience Details</h2>
+            <div class="flex mt-6 ">
+                <div class="w-1/4 ">
+                    <label  class="block font-normal">Company<span class="text-red-600">*</span></label>
+                    <input formControlName="compname" type="text"  placeholder="company-name"
+                        placeholder:color="grey" class="form-input p-2 rounded-md border-2" />
+                    <div *ngIf="editapplyjob.get('Compname')?.hasError('required') && editapplyjob.get('Compname')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        Company Name is required.
+                    </div>
+                </div>
+                <div class=" ml-36">
+                    <label for="jobtitle" class="block font-normal">Job Title<span class="text-red-600">*</span></label>
+                    <input type="text" formControlName="jobtitle" type="text" id="jobtitle"
+                        placeholder="Ex:Angular Developer" placeholder:color="grey"
+                        class="form-input p-2 rounded-md border-2" />
+                    <div *ngIf="editapplyjob.get('jobtitle')?.hasError('required') && editapplyjob.get('jobtitle')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        jobtitle is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex mt-6 ">
+                <div class="w-1/4 ">
+                    <label for="jobloc" class="block font-normal">Location<span class="text-red-600">*</span></label>
+                    <input formControlName="jobloc" type="text" id="jobloc" placeholder="Ex:Bangalore"
+                        placeholder:color="grey" class="form-input p-2 rounded-md border-2" />
+                    <div *ngIf="editapplyjob.get('jobloc')?.hasError('required') && editapplyjob.get('jobloc')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        job Location is required.
+                    </div>
+                </div>
+            </div>
+
+            <hr class="h-px my-8 bg-black border-0 ">
+            <h2>Education Details</h2>
+            <div class="flex mt-6 ">
+                <div class="w-1/4 ">
+                    <label for="course" class="block font-normal">Course<span class="text-red-600">*</span></label>
+                    <input formControlName="course" type="text" id="course" placeholder="Ex: B.E"
+                        placeholder:color="grey" class="form-input p-2 rounded-md border-2" />
+                    <div *ngIf="editapplyjob.get('course')?.hasError('required') && editapplyjob.get('course')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        Course is required.
+                    </div>
+                </div>
+                <div class=" ml-36">
+                    <label for="branch" class="block font-normal">Branch<span class="text-red-600">*</span></label>
+                    <input type="text" formControlName="branch" type="text" id="branch" placeholder="Ex: ISE,CSE,ECE"
+                        placeholder:color="grey" class="form-input p-2 rounded-md border-2" />
+                    <div *ngIf="editapplyjob.get('branch')?.hasError('required') && editapplyjob.get('branch')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        Branch is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex mt-6 ">
+                <div class="w-1/4 ">
+                    <label for="college" class="block font-normal">College<span class="text-red-600">*</span></label>
+                    <input formControlName="college" type="text" id="college"
+                        class="form-input p-2 rounded-md border-2" />
+                    <div *ngIf="editapplyjob.get('college')?.hasError('required') && editapplyjob.get('college')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        College is required.
+                    </div>
+                </div>
+                <div class=" ml-36">
+                    <label for="colloc" class="block font-normal">Location<span class="text-red-600">*</span></label>
+                    <input type="text" formControlName="colloc" type="text" id="colloc" placeholder="Ex: Bangalore"
+                        placeholder:color="grey" class="form-input p-2 rounded-md border-2" />
+                        <div *ngIf="editapplyjob.get('colloc')?.hasError('required') && editapplyjob.get('colloc')?.touched"
+                        class="text-red-600 text-sm mt-1">
+                        College Location is required.
+                    </div>
+                </div>
+            </div>
+       
+       
+            <button class="bg-teal-900 text-white py-2 px-4 mt-6 rounded-md" (click)="onSubmit()"  type="submit" >
+                Update
+              </button>
+             
+        </form>
+   
+</div>
