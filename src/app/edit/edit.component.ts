@@ -98,7 +98,7 @@ onSubmit() {
     (result: any) => {
       console.log(formData);
       console.log(result);
-      alert("Job Applied Successfully!!");
+      alert("Job Updated Successfully!!");
       this.router.navigate(['/table']);
     },
     (error) => {
