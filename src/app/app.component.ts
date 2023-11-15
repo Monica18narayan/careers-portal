@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -29,8 +30,33 @@ export class AppComponent {
   }
 
   alertmsg(): void {
-    alert('You are not logged in. Please log in to access the Careers page.');
+    Swal.fire({
+      text: 'Please log in to access the Careers page.',
+      icon: 'info',
+      showCancelButton: false,
+      confirmButtonText: 'OK',
+      iconColor: '#004D40', // Green color for the icon
+      confirmButtonColor: '#004D40', // Green color for the button
+      customClass: {
+        popup: 'flex flex-col items-center', // Display content in a column and center horizontally
+        icon: 'h-12 w-12 mb-4', // Setting height and width to 12px and adding margin-bottom
+        title: 'text-center', // Center the title text horizontally
+        confirmButton: 'border-none focus:outline-none focus:border-none hover:border-none' // Remove border and blue outline
+      },
+      width: '26rem', // Set a custom width for the alert box
+    });
   }
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+
 
   togglePopover() {
     this.isPopoverVisible = !this.isPopoverVisible;

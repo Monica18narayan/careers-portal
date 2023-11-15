@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { JobsServicesService } from '../jobs-services.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit',
@@ -93,13 +94,27 @@ onSubmit() {
 
   // Assuming you have an email property in formData
   const email = formData.email;
-
   this.jobservice.update(email, formData).subscribe(
     (result: any) => {
       console.log(formData);
       console.log(result);
-      alert("Job Updated Successfully!!");
-      this.router.navigate(['/table']);
+      // Show the Swal alert upon successful update
+      Swal.fire({
+        title: 'Job Updated Successfully!',
+        icon: 'success',
+        iconColor: '#004D40',
+        confirmButtonColor: '#004D40',
+         customClass: {
+          popup: 'flex flex-col items-center', // Display content in a column and center horizontally
+           // Setting height and width to 12px and adding margin-bottom
+          title: 'text-center', // Center the title text horizontally
+          confirmButton: 'border-none focus:outline-none focus:border-none hover:border-none' // Remove border and blue outline
+        },
+        width: '26rem',
+      }).then(() => {
+        // After user interaction with Swal (clicking "OK"), navigate to the table
+        this.router.navigate(['/table']);
+      });
     },
     (error) => {
       console.error('Error:', error);

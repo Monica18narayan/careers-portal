@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { JobsServicesService } from '../jobs-services.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -25,24 +26,49 @@ export class TableComponent {
     });
   }
 
-  deletejob(email:string){
-
-    this.jobserv.deletejob(email).subscribe(
-      () => {
-        console.log('Job deleted successfully');
-        // You can update the data in your component after deletion if needed
-        // For example: this.enroll = this.enroll.filter(enrollment => enrollment.id !== id);
-        this.job = this.job.filter(jobs => jobs.email !== email);
-      },
-      (error:any) => {
-        console.error('Error deleting job:', error);
+  deleteJob(email:string) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      iconColor:'#b20000',
+      showCancelButton: true,
+      confirmButtonColor: "#004D40",
+      cancelButtonColor: "#b20000",
+      confirmButtonText: "Yes, delete it!",
+      width: '20rem',
+     
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.jobserv.deletejob(email).subscribe(
+          () => {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your record has been deleted.",
+              icon: "success",
+              iconColor:'#004D40',
+              confirmButtonColor: "#004D40",
+              width: '26rem'
+            });
+            console.log('Job deleted successfully');
+            // Update the data in your component after deletion if needed
+            this.job = this.job.filter(jobs => jobs.email !== email);
+          },
+          (error: any) => {
+            console.error('Error deleting job:', error);
+          }
+        );
       }
-    );
-
+    });
   }
+  
+
+
+
   
   editjob(email: string) {
     debugger;
+    
     // Redirect to an edit route with the email parameter
     this.router.navigate(['/edit', email]);
   }

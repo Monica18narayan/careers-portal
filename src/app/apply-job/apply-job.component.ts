@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { JobsServicesService } from '../jobs-services.service';
 import { HttpClientModule } from '@angular/common/http';
 //import { JobsInterface } from '../jobsInterface';
+import Swal from 'sweetalert2';
 
 
 
@@ -58,22 +59,32 @@ export class ApplyJobComponent {
     }
 
 
-    onSubmit(){
-      
-     // if (this.ApplyJob.valid){
-      // console.log(this.ApplyJob.value);
+    onSubmit() {
       this.jobservice.getJobsService(this.ApplyJob.value).subscribe(
-        (result:any)=>{
-        console.log(result);
-        alert("Job Applied Successfully!!");
-        this.router.navigate(['/table']);
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
+        (result: any) => {
+          console.log(result);
+          Swal.fire({
+            text: 'Job Applied Successfully!!',
+            icon: 'success',
+            iconColor: '#004D40',
+            confirmButtonColor: '#004D40',
+             customClass: {
+              popup: 'flex flex-col items-center', // Display content in a column and center horizontally
+               // Setting height and width to 12px and adding margin-bottom
+              title: 'text-center', // Center the title text horizontally
+              confirmButton: 'border-none focus:outline-none focus:border-none hover:border-none' // Remove border and blue outline
+            },
+            width: '26rem',
+          }).then(() => {
+            this.router.navigate(['/table']);
+          });
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
       );
     }
-      //console.log('interface valu--',this.jobdata);
+     //console.log('interface valu--',this.jobdata);
       
    // }
   
