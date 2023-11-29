@@ -2,7 +2,7 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule ,routingComponents} from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule,FormsModule} from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { CareersComponent } from './careers/careers.component';
@@ -22,6 +22,10 @@ import { MatSortModule} from '@angular/material/sort';
 import { KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from './keycloak/job-init';
 import { EditComponent } from './edit/edit.component';
+import { UserComponent } from './user/user.component';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { QrcodeComponent } from './qrcode/qrcode.component';
 
 
 
@@ -38,6 +42,8 @@ import { EditComponent } from './edit/edit.component';
     TableComponent,
     FormDetailsComponent,
     EditComponent,
+   UserComponent,
+   QrcodeComponent
 
   ],
   imports: [
@@ -51,7 +57,10 @@ import { EditComponent } from './edit/edit.component';
     MatInputModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    CommonModule,
+    RouterOutlet,
+    FormsModule
     ],
     
   providers: [AuthguardService,KeycloakService,

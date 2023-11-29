@@ -3,6 +3,7 @@ const app = express();
 const { Pool } = require('pg');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const QRCode = require('qrcode');
 
 const pool = new Pool({
   user: 'postgres',
@@ -22,6 +23,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to your application.' });
+});
+
+app.post('/generate-qrcode', async (req, res) => {
+  const { link } = req.body;
+
+  try {
+    
+    const qrCodeData = await QRCode.toDataURL(link);
+    res.send({ qrCodeData });
+  } catch (error) {
+    res.status(500).send({ error: 'Error generating QR code' });
+  }
 });
 
 pool.connect();

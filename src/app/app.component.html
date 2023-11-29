@@ -18,9 +18,18 @@
             <i class="fa fa-graduation-cap"></i>&nbsp;
             <a routerLink="/careers" routerLinkActive="active" (click)="alrMsg()">Career</a>
         </li>
-        <li>
+        <!-- <li>
           <i class="fas fa-briefcase"></i>&nbsp;
           <a routerLink="/formDetails" routerLinkActive="active">Details</a>
+        </li> -->
+        
+        <li>
+          <i class="fas fa-users"></i>&nbsp;
+          <a routerLink="/user" routerLinkActive="active">Users</a>
+        </li>
+        <li>
+          <i class="fas fa-qrcode"></i>&nbsp;
+          <a routerLink="/qrcode" routerLinkActive="active">QR Code</a>
         </li>
       </ul>
     </div>
@@ -49,16 +58,17 @@
           <div class="px-3 py-2 bg-teal-900 h-12 border-b rounded-t-lg">
               <h3 class="font-semibold text-white dark:text-white">User Information</h3>
           </div>
-          <div class="px-3 py-2">
+          
+            <div class="px-3 py-2">
               <p>
-                  <strong>@</strong> {{ username }}
+                <strong>&#64; </strong> {{ username }}
               </p>
               <p class="text-gray-500">
-                  Welcome to the muraai's official website,
-                  in case of any enquiries please contact or 
-                  mail.
-            </p>
-          </div>
+                Welcome to the muraai's official website, in case of any enquiries please contact or mail.
+              </p>
+            </div>
+            
+         
           <div data-popper-arrow></div>
       </div>
   </li>

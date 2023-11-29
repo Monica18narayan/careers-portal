@@ -10,6 +10,8 @@ import { AuthguardService } from './Auth/authguard.service';
 import { AuthguardGuard } from './Auth/authguard.guard';
 import { FormDetailsComponent } from './form-details/form-details.component';
 import { EditComponent } from './edit/edit.component';
+import { UserComponent } from './user/user.component';
+import { QrcodeComponent } from './qrcode/qrcode.component';
 
 
 const routes: Routes = [
@@ -21,7 +23,9 @@ const routes: Routes = [
   {path:'apply-job',component:ApplyJobComponent},
   {path:'table',component:TableComponent},
   {path:'formDetails',component:FormDetailsComponent},
-  {path:'table/edit/:email', component:EditComponent}
+  {path:'table/edit/:email', component:EditComponent},
+  { path: 'user', component: UserComponent },
+  {path:'qrcode',component: QrcodeComponent}
 ];
 
 @NgModule({
@@ -29,4 +33,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents =[HomeComponent,AboutComponent,CareersComponent]
+export const routingComponents =[HomeComponent,AboutComponent,CareersComponent,UserComponent,QrcodeComponent]
