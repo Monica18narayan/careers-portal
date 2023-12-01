@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup ,ReactiveFormsModule} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -16,7 +16,7 @@ export class QrcodeComponent implements OnInit {
 
   ngOnInit(): void {
     this.qrCodeForm = this.fb.group({
-      link: [''] // Default value for the link input
+      link: [''] 
     });
   }
 
@@ -29,11 +29,11 @@ export class QrcodeComponent implements OnInit {
         this.qrCodeData = response?.qrCodeData;
       } catch (error) {
         console.error('Error generating QR code:', error);
-        // Handle error here
+       
       }
     } else {
       console.error('Link value is null or undefined');
-      // Handle null or undefined link value
+     
     }
   }
 }

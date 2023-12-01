@@ -76,4 +76,15 @@
 </ul>
 </header>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+
+<footer class="bg-teal-900 h-20 relative  px-4 py-6">
+  <p class="text-neutral-50 ">{{ currentDate }}</p>  
+  <p class="text-white">&copy; 2023 Career Portal. All rights reserved.</p>
+  <div class="absolute bottom-0 right-0 mr-4 mb-4">
+    <!-- Replace the icon with your message icon -->
+    <i class="fas fa-comment text-white text-xl"></i>&nbsp;
+    <a routerLink="/support" routerLinkActive="active" class="text-neutral-50 text-lg">Support</a>
+   
+  </div>
+</footer>

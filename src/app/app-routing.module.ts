@@ -12,10 +12,17 @@ import { FormDetailsComponent } from './form-details/form-details.component';
 import { EditComponent } from './edit/edit.component';
 import { UserComponent } from './user/user.component';
 import { QrcodeComponent } from './qrcode/qrcode.component';
+import { AppComponent } from './app.component';
+import { SupportComponent } from './support/support.component';
 
 
-const routes: Routes = [
-  {path:'',pathMatch:'full',redirectTo:'home'},
+
+const routes: Routes = [{
+  path: '',
+  pathMatch: 'full',
+  redirectTo: 'app', // Redirect to 'app' if path is not empty
+},
+{path:'',pathMatch:'full',redirectTo:'home'},
   {path:'home',component:HomeComponent},
   {path:'about',component:AboutComponent},
   {path:'careers',component:CareersComponent,canActivate:[AuthguardGuard]},
@@ -25,7 +32,8 @@ const routes: Routes = [
   {path:'formDetails',component:FormDetailsComponent},
   {path:'table/edit/:email', component:EditComponent},
   { path: 'user', component: UserComponent },
-  {path:'qrcode',component: QrcodeComponent}
+  {path:'qrcode',component: QrcodeComponent},
+  {path:'support',component: SupportComponent}
 ];
 
 @NgModule({

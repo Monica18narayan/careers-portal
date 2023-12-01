@@ -33,21 +33,7 @@ isDuplicateEmail: boolean = false;
     });
   }
 
- onSubmit() {
-  debugger
-  if (this.userForm.valid) {
-    const newUser = this.userForm.value;
-    
-    if (this.userDetails!='') {
-      
-      this.updateUser(newUser); 
-    } else {
-      this.addUser(newUser); 
-    }
-  } else {
-    alert('Please fill in all required fields correctly.');
-  }
-}
+ 
 
 
 updateUser(newUser: any) {
@@ -135,6 +121,22 @@ addUser(newUser: any) {
     } else {
       this.message = 'Please provide an email to search';
       this.userForm.reset();
+    }
+  }
+
+  onSubmit() {
+    debugger
+    if (this.userForm.valid) {
+      const newUser = this.userForm.value;
+      
+      if (this.userDetails!='') {
+        
+        this.updateUser(newUser); 
+      } else {
+        this.addUser(newUser); 
+      }
+    } else {
+      alert('Please fill in all required fields correctly.');
     }
   }
 

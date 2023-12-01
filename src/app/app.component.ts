@@ -1,27 +1,30 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
-import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'Form';
   isLoggedIn: boolean = false;
   username: string | undefined;
   isPopoverVisible: boolean = false;
- 
-  
-  private hidePopoverTimeout: any;
-  private readonly delayDuration: number = 500; 
+  currentDate: string = '';
 
-  constructor(private keycloakservice: KeycloakService, private route: Router) {
+  private hidePopoverTimeout: any;
+  private readonly delayDuration: number = 500;
+
+  constructor(
+    private keycloakservice: KeycloakService,
+    private datePipe: DatePipe
+  ) {
     this.checkLoginStatus();
+    this.getCurrentDate();
   }
 
   alrMsg() {
@@ -47,34 +50,20 @@ export class AppComponent {
       width: '26rem', // Set a custom width for the alert box
     });
   }
-  
-  
-  
-  
-  
-
-  
-  
-  
-  
-
 
   togglePopover() {
     this.isPopoverVisible = !this.isPopoverVisible;
   }
 
-  
   hidePopoverWithDelay() {
     this.hidePopoverTimeout = setTimeout(() => {
       this.isPopoverVisible = false;
     }, this.delayDuration);
   }
 
- 
   cancelHide() {
     clearTimeout(this.hidePopoverTimeout);
   }
-
 
   showPopover() {
     this.isPopoverVisible = true;
@@ -88,7 +77,6 @@ export class AppComponent {
     this.keycloakservice.logout();
     this.isLoggedIn = false;
     this.username = undefined;
-   
   }
 
   checkLoginStatus() {
@@ -97,11 +85,17 @@ export class AppComponent {
       if (this.isLoggedIn) {
         this.keycloakservice.loadUserProfile().then((profile: KeycloakProfile | null) => {
           if (profile) {
-            this.username = profile.username;          
+            this.username = profile.username;
           }
         });
       }
-      this.route.navigate(['/careers']);
+      // Navigation logic...
     });
+  }
+
+  getCurrentDate() {
+    const now = new Date();
+    const formattedDate = this.datePipe.transform(now, 'medium');
+    this.currentDate = formattedDate ?? 'Date Unavailable'; 
   }
 }

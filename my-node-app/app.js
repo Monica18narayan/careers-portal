@@ -25,6 +25,39 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to your application.' });
 });
 
+
+app.post('/api/chat', (req, res) => {
+  const userMessage = req.body.message;
+  // Example: Mock response from a simple chatbot
+  const botResponse = generateBotResponse(userMessage);
+  res.json({ message: botResponse });
+});
+
+
+function generateBotResponse(userMessage) {
+  const greetings = ['hello', 'hi', 'hey', 'greetings'];
+  const farewells = ['bye', 'goodbye', 'see you', 'farewell'];
+  const questions = ['how are you?', 'what is your name?', 'where are you from?'];
+  const careerRelatedQueries = ['job openings', 'apply for a job', 'company culture', 'career growth'];
+
+  const lowerCaseUserMessage = userMessage.toLowerCase();
+
+  
+  if (greetings.some(greeting => lowerCaseUserMessage.includes(greeting))) {
+    return 'Hello there! How can I assist you today with your career queries?';
+  } else if (farewells.some(farewell => lowerCaseUserMessage.includes(farewell))) {
+    return 'Goodbye! Have a great day!';
+  } else if (questions.some(question => lowerCaseUserMessage.includes(question))) {
+    return 'I am just a simple bot. Please ask something related to your career!';
+  } else if (careerRelatedQueries.some(query => lowerCaseUserMessage.includes(query))) {
+   
+    return 'We have various job openings available. Please visit our careers page to explore them!';
+  } else {
+    return 'I am not sure how to respond to that.';
+  }
+}
+
+
 app.post('/generate-qrcode', async (req, res) => {
   const { link } = req.body;
 

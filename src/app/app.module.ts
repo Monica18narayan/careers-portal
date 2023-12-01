@@ -23,9 +23,14 @@ import { KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from './keycloak/job-init';
 import { EditComponent } from './edit/edit.component';
 import { UserComponent } from './user/user.component';
-import { CommonModule } from '@angular/common';
+
 import { RouterOutlet } from '@angular/router';
 import { QrcodeComponent } from './qrcode/qrcode.component';
+
+import { CommonModule, DatePipe } from '@angular/common';
+import { SupportComponent } from './support/support.component';
+
+
 
 
 
@@ -43,8 +48,8 @@ import { QrcodeComponent } from './qrcode/qrcode.component';
     FormDetailsComponent,
     EditComponent,
    UserComponent,
-   QrcodeComponent
-
+   QrcodeComponent,
+   SupportComponent
   ],
   imports: [
     BrowserModule,
@@ -60,10 +65,11 @@ import { QrcodeComponent } from './qrcode/qrcode.component';
     MatSortModule,
     CommonModule,
     RouterOutlet,
-    FormsModule
+    FormsModule,
+    DatePipe
     ],
     
-  providers: [AuthguardService,KeycloakService,
+  providers: [AuthguardService,KeycloakService,DatePipe,
     {
       provide: APP_INITIALIZER,
       useFactory: initializeKeycloak,
