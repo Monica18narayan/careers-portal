@@ -14,6 +14,7 @@ import { UserComponent } from './user/user.component';
 import { QrcodeComponent } from './qrcode/qrcode.component';
 import { AppComponent } from './app.component';
 import { SupportComponent } from './support/support.component';
+import { InhomeComponent } from './inhome/inhome.component';
 
 
 
@@ -22,7 +23,7 @@ const routes: Routes = [{
   pathMatch: 'full',
   redirectTo: 'app', // Redirect to 'app' if path is not empty
 },
-{path:'',pathMatch:'full',redirectTo:'home'},
+  {path:'',pathMatch:'full',redirectTo:'home'},
   {path:'home',component:HomeComponent},
   {path:'about',component:AboutComponent},
   {path:'careers',component:CareersComponent,canActivate:[AuthguardGuard]},
@@ -33,7 +34,8 @@ const routes: Routes = [{
   {path:'table/edit/:email', component:EditComponent},
   { path: 'user', component: UserComponent },
   {path:'qrcode',component: QrcodeComponent},
-  {path:'support',component: SupportComponent}
+  {path:'support',component: SupportComponent},
+  {path:'inhome',component:InhomeComponent}
 ];
 
 @NgModule({

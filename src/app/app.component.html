@@ -47,34 +47,36 @@
 
   </nav>
 </header>
-<header class="bg-yellow-50 h-14">
-  <ul class=" text-teal-900 font-extrabold py-4 px-4 text-xl ">
-    <li *ngIf="isLoggedIn" class="flex items-center relative" (mouseenter)="showPopover()" (mouseleave)="hidePopoverWithDelay()">
-      <i class="fas fa-user"></i>&nbsp;
-      <span class="ml-2 username">{{ username }}</span>
-      <div *ngIf="isPopoverVisible" id="popover-user" role="tooltip" class="absolute z-10 inline-block w-64 mt-56 text-sm
-       text-neutral-800 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm" 
-       (mouseenter)="cancelHide()" (mouseleave)="hidePopoverWithDelay()">
-          <div class="px-3 py-2 bg-teal-900 h-12 border-b rounded-t-lg">
-              <h3 class="font-semibold text-white dark:text-white">User Information</h3>
-          </div>
-          
-            <div class="px-3 py-2">
-              <p>
-                <strong>&#64; </strong> {{ username }}
-              </p>
-              <p class="text-gray-500">
-                Welcome to the muraai's official website, in case of any enquiries please contact or mail.
-              </p>
+<div class="start-0 top-0">
+  <header [ngClass]="{hidden: iflogged}" class="bg-yellow-50  start-0 top-0">
+    <ul class=" text-teal-900 font-extrabold py-4 px-4 text-xl ">
+      <li  *ngIf="isLoggedIn" class="flex items-center relative" (mouseenter)="showPopover()" (mouseleave)="hidePopoverWithDelay()">
+        <i class="fas fa-user"></i>&nbsp;
+        <span  class="ml-2 username">{{ username }}</span>
+        <div *ngIf="isPopoverVisible" id="popover-user" role="tooltip" class="absolute z-10 inline-block w-64 mt-56 text-sm
+         text-neutral-800 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm" 
+         (mouseenter)="cancelHide()" (mouseleave)="hidePopoverWithDelay()">
+            <div class="px-3 py-2 bg-teal-900 h-12 border-b rounded-t-lg">
+                <h3 class="font-semibold text-white dark:text-white">User Information</h3>
             </div>
             
-         
-          <div data-popper-arrow></div>
-      </div>
-  </li>
-  
-</ul>
-</header>
+              <div class="px-3 py-2">
+                <p>
+                  <strong>&#64; </strong> {{ username }}
+                </p>
+                <p class="text-gray-500">
+                  Welcome to the muraai's official website, in case of any enquiries please contact or mail.
+                </p>
+              </div>
+              
+           
+            <div data-popper-arrow></div>
+        </div>
+    </li>
+    
+  </ul>
+  </header> 
+</div>
 
   <router-outlet></router-outlet>
 
@@ -82,7 +84,7 @@
   <p class="text-neutral-50 ">{{ currentDate }}</p>  
   <p class="text-white">&copy; 2023 Career Portal. All rights reserved.</p>
   <div class="absolute bottom-0 right-0 mr-4 mb-4">
-    <!-- Replace the icon with your message icon -->
+   
     <i class="fas fa-comment text-white text-xl"></i>&nbsp;
     <a routerLink="/support" routerLinkActive="active" class="text-neutral-50 text-lg">Support</a>
    

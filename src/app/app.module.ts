@@ -29,6 +29,7 @@ import { QrcodeComponent } from './qrcode/qrcode.component';
 
 import { CommonModule, DatePipe } from '@angular/common';
 import { SupportComponent } from './support/support.component';
+import { InhomeComponent } from './inhome/inhome.component';
 
 
 
@@ -49,7 +50,8 @@ import { SupportComponent } from './support/support.component';
     EditComponent,
    UserComponent,
    QrcodeComponent,
-   SupportComponent
+   SupportComponent,
+   InhomeComponent
   ],
   imports: [
     BrowserModule,

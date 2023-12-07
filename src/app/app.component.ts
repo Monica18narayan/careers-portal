@@ -15,6 +15,7 @@ export class AppComponent {
   username: string | undefined;
   isPopoverVisible: boolean = false;
   currentDate: string = '';
+  iflogged:boolean=true;
 
   private hidePopoverTimeout: any;
   private readonly delayDuration: number = 500;
@@ -86,10 +87,11 @@ export class AppComponent {
         this.keycloakservice.loadUserProfile().then((profile: KeycloakProfile | null) => {
           if (profile) {
             this.username = profile.username;
+            this.iflogged=false;
           }
         });
       }
-      // Navigation logic...
+      
     });
   }
 

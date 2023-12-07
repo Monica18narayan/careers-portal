@@ -5,6 +5,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const QRCode = require('qrcode');
 
+
+
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
@@ -83,6 +85,7 @@ app.get('/api/applyjob', (req, res) => {
 });
 
 
+
 app.post('/api/applyjob', (req, res) => {
   const {
     firstname,
@@ -128,6 +131,7 @@ app.post('/api/applyjob', (req, res) => {
         console.error('Error inserting data:', error);
         res.status(500).json({ message: 'Error inserting data into the database' });
       } else {
+        successfulJobCount++;
         res.status(201).json({ message: 'Data inserted successfully' });
       }
     }

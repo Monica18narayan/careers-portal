@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JobsServicesService } from '../jobs-services.service';
 import Swal from 'sweetalert2';
-import html2canvas from 'html2canvas'; // Import html2canvas for capturing HTML content
-import jsPDF from 'jspdf'; // Import jsPDF
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-apply-job',
@@ -12,7 +12,7 @@ import jsPDF from 'jspdf'; // Import jsPDF
   styleUrls: ['./apply-job.component.css']
 })
 export class ApplyJobComponent {
-
+  
   title = 'Apply For This Job';
   genders = ['Female', 'Male', 'cannot disclose'];
   locs = ['Bangalore', 'Chennai'];
@@ -38,12 +38,13 @@ export class ApplyJobComponent {
       colloc: ['', Validators.required],
     });
   }
-
+  
   get valid() {
     return this.ApplyJob.controls;
   }
 
   onSubmit() {
+    debugger;
     this.jobservice.getJobsService(this.ApplyJob.value).subscribe(
       (result: any) => {
         console.log(result);
@@ -59,8 +60,7 @@ export class ApplyJobComponent {
           },
           width: '26rem',
         }).then(() => {
-          this.onDownloadForm(); // Call download function first
-          // Navigate to table page after the download (within the download function)
+          this.onDownloadForm();
         });
       },
       (error) => {
