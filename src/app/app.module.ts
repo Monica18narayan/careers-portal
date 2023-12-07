@@ -2,7 +2,7 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule ,routingComponents} from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule,FormsModule} from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { CareersComponent } from './careers/careers.component';
@@ -21,6 +21,18 @@ import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule} from '@angular/material/sort';
 import { KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from './keycloak/job-init';
+import { EditComponent } from './edit/edit.component';
+import { UserComponent } from './user/user.component';
+
+import { RouterOutlet } from '@angular/router';
+import { QrcodeComponent } from './qrcode/qrcode.component';
+
+import { CommonModule, DatePipe } from '@angular/common';
+import { SupportComponent } from './support/support.component';
+import { InhomeComponent } from './inhome/inhome.component';
+
+
+
 
 
 
@@ -35,7 +47,11 @@ import { initializeKeycloak } from './keycloak/job-init';
     ApplyJobComponent,
     TableComponent,
     FormDetailsComponent,
-
+    EditComponent,
+   UserComponent,
+   QrcodeComponent,
+   SupportComponent,
+   InhomeComponent
   ],
   imports: [
     BrowserModule,
@@ -48,10 +64,14 @@ import { initializeKeycloak } from './keycloak/job-init';
     MatInputModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    CommonModule,
+    RouterOutlet,
+    FormsModule,
+    DatePipe
     ],
     
-  providers: [AuthguardService,KeycloakService,
+  providers: [AuthguardService,KeycloakService,DatePipe,
     {
       provide: APP_INITIALIZER,
       useFactory: initializeKeycloak,

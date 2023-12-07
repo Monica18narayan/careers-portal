@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
-import { Router } from '@angular/router';
+import { KeycloakProfile } from 'keycloak-js';
+import Swal from 'sweetalert2';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -9,25 +11,93 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Form';
+  isLoggedIn: boolean = false;
+  username: string | undefined;
+  isPopoverVisible: boolean = false;
+  currentDate: string = '';
+  iflogged:boolean=true;
 
-  constructor(private keycloakservice: KeycloakService, private route: Router) {
-   // this.initializeKeycloak();
+  private hidePopoverTimeout: any;
+  private readonly delayDuration: number = 500;
+
+  constructor(
+    private keycloakservice: KeycloakService,
+    private datePipe: DatePipe
+  ) {
+    this.checkLoginStatus();
+    this.getCurrentDate();
   }
 
   alrMsg() {
-    alert('Please login to access careers!!');
+    if (!this.isLoggedIn) {
+      this.alertmsg();
+    }
   }
-  loginWithKeycloak(){
-   this.keycloakservice.login();
-  }
-  logoutWithKeycloak(){
-    this.keycloakservice.logout();
-  }
-  ngOnInit() {
-    this.keycloakservice.isLoggedIn().then((isLoggedIn) => {
-      if (isLoggedIn) {
-        this.route.navigate(['/careers']);
-      }
+
+  alertmsg(): void {
+    Swal.fire({
+      text: 'Please log in to access the Careers page.',
+      icon: 'info',
+      showCancelButton: false,
+      confirmButtonText: 'OK',
+      iconColor: '#004D40', // Green color for the icon
+      confirmButtonColor: '#004D40', // Green color for the button
+      customClass: {
+        popup: 'flex flex-col items-center', // Display content in a column and center horizontally
+        icon: 'h-12 w-12 mb-4', // Setting height and width to 12px and adding margin-bottom
+        title: 'text-center', // Center the title text horizontally
+        confirmButton: 'border-none focus:outline-none focus:border-none hover:border-none' // Remove border and blue outline
+      },
+      width: '26rem', // Set a custom width for the alert box
     });
+  }
+
+  togglePopover() {
+    this.isPopoverVisible = !this.isPopoverVisible;
+  }
+
+  hidePopoverWithDelay() {
+    this.hidePopoverTimeout = setTimeout(() => {
+      this.isPopoverVisible = false;
+    }, this.delayDuration);
+  }
+
+  cancelHide() {
+    clearTimeout(this.hidePopoverTimeout);
+  }
+
+  showPopover() {
+    this.isPopoverVisible = true;
+  }
+
+  loginWithKeycloak() {
+    this.keycloakservice.login();
+  }
+
+  logoutWithKeycloak() {
+    this.keycloakservice.logout();
+    this.isLoggedIn = false;
+    this.username = undefined;
+  }
+
+  checkLoginStatus() {
+    this.keycloakservice.isLoggedIn().then((loggedIn) => {
+      this.isLoggedIn = loggedIn;
+      if (this.isLoggedIn) {
+        this.keycloakservice.loadUserProfile().then((profile: KeycloakProfile | null) => {
+          if (profile) {
+            this.username = profile.username;
+            this.iflogged=false;
+          }
+        });
+      }
+      
+    });
+  }
+
+  getCurrentDate() {
+    const now = new Date();
+    const formattedDate = this.datePipe.transform(now, 'medium');
+    this.currentDate = formattedDate ?? 'Date Unavailable'; 
   }
 }

@@ -22,6 +22,16 @@ export class JobsServicesService {
     return this.http.post(`${this.url}/api/applyjob`,jobs);
    }
 
+   getCurrentDetails(email: string): Observable<any> {
+    const encodedEmail = encodeURIComponent(email);
+    return this.http.get(`${this.url}/api/JobDetailsByEmail/${encodedEmail}`);
+  }
+  
+  update(email: string, updatedData: any): Observable<any> {
+    const encodedEmail = encodeURIComponent(email);
+    return this.http.put(`${this.url}/api/applyjob/${encodedEmail}`, updatedData);
+  }
+
    deletejob(email:string){
     return this.http.delete(`${this.url}/api/applyjob/${email}`);
   }

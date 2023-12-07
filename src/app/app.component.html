@@ -1,10 +1,11 @@
-<header class="bg-teal-900 h-24">
+<header class="bg-teal-900 h-20">
   <nav class="flex justify-between items-center w-[98%]">
+   
     <div>
-      <img class="w-1/2 h-24" src="https://muraai.com/wp-content/uploads/2019/12/new-logo-for-web-1.png">
+      <img class="w-36 h-auto px-3 py-8" src="assets/images/Pic.png">
     </div>
-    <div>
-      <ul class="flex items-center gap-[4vw] text-neutral-50 mt-10">
+  <div>
+      <ul class="flex items-center gap-[4vw] text-neutral-50 mt-4 ">
         <li>
           <i class="fas fa-home"></i>&nbsp;
            <a routerLink="/home" routerLinkActive="active">Home</a>
@@ -13,31 +14,79 @@
           <i class="fas fa-info-circle"></i>&nbsp;
           <a routerLink="/about" routerLinkActive="active">About</a>
         </li>
-        <li>
-          <!-- <ng-container *ngIf="!isLoggedIn(); else disabledLink"> -->
+        <li>  
             <i class="fa fa-graduation-cap"></i>&nbsp;
             <a routerLink="/careers" routerLinkActive="active" (click)="alrMsg()">Career</a>
-          <!-- </ng-container> -->
-          <!-- <ng-template #disabledLink>
-            <span>Career</span>
-          </ng-template> -->
         </li>
-        <li>
+        <!-- <li>
           <i class="fas fa-briefcase"></i>&nbsp;
           <a routerLink="/formDetails" routerLinkActive="active">Details</a>
+        </li> -->
+        
+        <li>
+          <i class="fas fa-users"></i>&nbsp;
+          <a routerLink="/user" routerLinkActive="active">Users</a>
+        </li>
+        <li>
+          <i class="fas fa-qrcode"></i>&nbsp;
+          <a routerLink="/qrcode" routerLinkActive="active">QR Code</a>
         </li>
       </ul>
     </div>
-    <div>
-      
-        <button
-          class="bg-transparent hover:bg-teal-900 text-neutral-50 font-semibold hover:text-white py-2 px-4 border border-white hover:border-white rounded ml-12 mt-10" 
+  
+  <div>
+    <!-- <i class="far fa-user-circle" class="color: #fafafa;"></i> -->
+        <button *ngIf="!isLoggedIn" 
+          class="bg-transparent hover:bg-teal-900 text-neutral-50 font-semibold hover:text-white py-2 px-4 border border-white hover:border-white rounded ml-12 mt-2" 
           (click)="loginWithKeycloak()">Login</button>
-          <button
-          class="bg-transparent hover:bg-teal-900 text-neutral-50 font-semibold hover:text-white py-2 px-4 border border-white hover:border-white rounded ml-12 mt-10" 
+          
+          <button *ngIf="isLoggedIn"
+          class="bg-transparent hover:bg-teal-900 text-neutral-50 font-semibold hover:text-white py-2 px-4 border border-white hover:border-white rounded ml-12 mt-2" 
           (click)="logoutWithKeycloak()">Logout</button>
-   
     </div>
+
   </nav>
 </header>
-<router-outlet></router-outlet>
+<div class="start-0 top-0">
+  <header [ngClass]="{hidden: iflogged}" class="bg-yellow-50  start-0 top-0">
+    <ul class=" text-teal-900 font-extrabold py-4 px-4 text-xl ">
+      <li  *ngIf="isLoggedIn" class="flex items-center relative" (mouseenter)="showPopover()" (mouseleave)="hidePopoverWithDelay()">
+        <i class="fas fa-user"></i>&nbsp;
+        <span  class="ml-2 username">{{ username }}</span>
+        <div *ngIf="isPopoverVisible" id="popover-user" role="tooltip" class="absolute z-10 inline-block w-64 mt-56 text-sm
+         text-neutral-800 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm" 
+         (mouseenter)="cancelHide()" (mouseleave)="hidePopoverWithDelay()">
+            <div class="px-3 py-2 bg-teal-900 h-12 border-b rounded-t-lg">
+                <h3 class="font-semibold text-white dark:text-white">User Information</h3>
+            </div>
+            
+              <div class="px-3 py-2">
+                <p>
+                  <strong>&#64; </strong> {{ username }}
+                </p>
+                <p class="text-gray-500">
+                  Welcome to the muraai's official website, in case of any enquiries please contact or mail.
+                </p>
+              </div>
+              
+           
+            <div data-popper-arrow></div>
+        </div>
+    </li>
+    
+  </ul>
+  </header> 
+</div>
+
+  <router-outlet></router-outlet>
+
+<footer class="bg-teal-900 h-20 relative  px-4 py-6">
+  <p class="text-neutral-50 ">{{ currentDate }}</p>  
+  <p class="text-white">&copy; 2023 Career Portal. All rights reserved.</p>
+  <div class="absolute bottom-0 right-0 mr-4 mb-4">
+   
+    <i class="fas fa-comment text-white text-xl"></i>&nbsp;
+    <a routerLink="/support" routerLinkActive="active" class="text-neutral-50 text-lg">Support</a>
+   
+  </div>
+</footer>

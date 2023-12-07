@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="overflow-x-auto">
-        <table class="w-full text-sm text-left ">
+        <table id ="jobTable" class="w-full text-sm text-left ">
           <thead class="text-xs text-white uppercase bg-teal-900 ">
             <tr>
               <th scope="col" class="px-4 py-3">First Name</th>
@@ -45,8 +45,8 @@
               <td class="px-4 py-3">
                 <!-- Edit and Delete buttons -->
                 <span class="flex">
-                  <a routerLink="['/edit', jobs.email]"><i class="fas fa-edit text-teal-900 cursor-pointer mr-4" (click)="editjob(jobs.email)"></i></a>
-                  <i class="fas fa-trash-alt text-red-500 cursor-pointer" (click)="deletejob(jobs.email)"></i>
+                  <a [routerLink]="['/table/edit', jobs.email]"><i class="fas fa-edit text-teal-900 cursor-pointer mr-4" ></i></a>
+                  <i class="fas fa-trash-alt text-red-500 cursor-pointer" (click)="deleteJob(jobs.email)"></i>
                 </span>
               </td>
             </tr>
@@ -54,5 +54,9 @@
         </table>
       </div>
     </div>
-
+    <div class="flex justify-end mr-28">
+    <button class="bg-teal-900 text-white font-semibold  mt-14 px-4 py-2 rounded-lg" (click)="exportExcel()">
+      Download Excel
+    </button>
+  </div>
 </section>

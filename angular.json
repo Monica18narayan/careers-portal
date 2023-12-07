@@ -13,9 +13,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "optimization": true,
             "outputPath": "dist/form",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "lodash"
+           ],
             "polyfills": [
               "zone.js"
             ],
@@ -35,8 +39,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "500kb"
                 },
                 {
                   "type": "anyComponentStyle",
